@@ -11,6 +11,18 @@ public class ArraysTasks {
         shift(a);
         System.out.println(Arrays.toString(a));
         System.out.println(Arrays.toString(copyShift(new int[]{1, 2, 3, 4, 5, 6})));
+        int [][] b = new int [][]{
+                {10, 1, 1000000, 44, 4244},
+                {111, 423, 44},
+                {5, 27, 1, 33, 123523, 6}
+        };
+        //printTable(b);
+        printTableAligned(b);
+        char [][] d = createTable(20,'.');
+        fillFirstAndLastLines(d);
+        fillFirstAndLastColumns(d);
+        printTable(d);
+
     }
 
     private static int[] even(int n) {
@@ -63,6 +75,80 @@ public class ArraysTasks {
             b[i] = a[i+1];
         }
         return b;
+    }
+
+    private static void printTable(int[][] a){
+        for (int i = 0; i != a.length; ++i){
+            for (int j = 0; j!=a[i].length; ++j){
+                System.out.print("  "+ a[i][j]);
+            }
+            System.out.println();
+        }
+    }
+
+    private static void printTableAligned(int[][] a){
+        int max = 0;
+        for (int i =0; i != a.length; ++i){
+            if (a[i].length > max){
+                max  = a[i].length;
+            }
+        }
+        int [][] n = new int [a.length][max];
+        int [] m = new int [max] ;
+        int k = 0;
+        int x = 0;
+        for (int i =0; i != a.length; ++i){
+            for (int j = 0; j != a[i].length; ++j){
+                x =a[i][j];
+                k = 0;
+                while ( x > 0){
+                    k = k + 1;
+                    x = x /10 ;
+                }
+                n[i][j] = k;
+                if (n[i][j] > m[j]){
+                    m[j] = n[i][j];
+                }
+            }
+        }
+        for (int i = 0; i != a.length; ++i){
+            for (int j = 0; j != a[i].length; ++j){
+                for (x = 0; x < m[j]-n[i][j]; ++x){
+                    System.out.print(" ");
+                }
+                System.out.print("  " + a[i][j]);
+            }
+            System.out.println();
+        }
+    }
+    private static char[][] createTable(int n, char a){
+        char[][] x = new char [n][n];
+        for (int i = 0; i!= n; ++i){
+            for (int j = 0; j != n; ++j){
+                x[i][j] = a;
+            }
+        }
+        return x;
+    }
+    private static void printTable(char[][] a){
+        for (int i = 0; i != a.length; ++i){
+            for (int j = 0; j != a.length; ++j){
+                System.out.print(" "+ a[i][j]);
+            }
+            System.out.println();
+        }
+    }
+    private static void fillFirstAndLastLines(char[][] a){
+        char x = '#';
+        Arrays.fill(a[0], x );
+        Arrays.fill(a[a.length-1], x);
+    }
+    private static void fillFirstAndLastColumns(char[][] a){
+        char x = '#';
+        for (int i = 0; i != a.length; ++i){
+            a[i][0] = x;
+            a[i][a.length-1] = x;
+        }
     }
 }
 

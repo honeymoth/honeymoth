@@ -60,7 +60,7 @@ public class ArraysTasks {
     }
 
     private static void shift(int[] a){
-        int end = a[0];
+        int end;
         for (int i = a.length - 1; i != 0; i = i - 1){
             end = a[i];
             a[i] = a[i-1];
@@ -95,8 +95,8 @@ public class ArraysTasks {
         }
         int [][] n = new int [a.length][max];
         int [] m = new int [max] ;
-        int k = 0;
-        int x = 0;
+        int k;
+        int x;
         for (int i =0; i != a.length; ++i){
             for (int j = 0; j != a[i].length; ++j){
                 x =a[i][j];

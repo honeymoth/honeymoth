@@ -2,16 +2,15 @@ import java.util.Arrays;
 
 public class Algorithms {
     public static void main(String[] args) {
-        sieveOfEratosthenes(30);
-        System.out.println();
-        int[] x = primes(7);
+        int[] x = primes(30);
         System.out.println(Arrays.toString(x));
-        primeFactors(60);
-        System.out.println();
-        System.out.println(binarySearch(new int[]{1, 5, 3, 1, 8, 3}, 8));
+        int[][] a = primeFactors(56);
+        for (int i = 0; i != a.length; ++i) {
+            System.out.print(Arrays.toString(a[i]) + " ");
+        }
     }
 
-    private static void sieveOfEratosthenes(int n) {
+    private static boolean[] sieveOfEratosthenes(int n) {
         boolean[] prime = new boolean[n + 1];
         for (int i = 2; i != n + 1; ++i) {
             prime[i] = true;
@@ -28,81 +27,63 @@ public class Algorithms {
                 k = k + 1;
             }
         }
-        for (int i = 0; i != n + 1; ++i) {
-            if (prime[i]) {
-                System.out.print(" " + i);
-            }
-
-        }
+        return prime;
     }
 
     private static int[] primes(int n) {
-        int[] prime = new int[n + 1];
-        int[] result = new int[n];
-        int p;
-        int k = 0;
-        for (int i = 1; i != Math.round(Math.sqrt(n)); ++i) {
-            p = 2;
-            while (i * p + p <= n) {
-                prime[i * p + p] = i * p + p;
-                p = p + 1;
+        boolean[] sieve = sieveOfEratosthenes(n);
+        int count = 0;
+        for (int i = 0; i != sieve.length; ++i) {
+            if (sieve[i]) {
+                count = count + 1;
             }
         }
-        for (int i = 2; i != n + 1; ++i) {
-            if (prime[i] != i) {
-                result[k] = i;
-                k = k + 1;
+        int[] primes = new int[count];
+        count = 0;
+        for (int i = 0; i != n + 1; ++i) {
+            if (sieve[i]) {
+                primes[count] = i;
+                count = count + 1;
             }
+        }
+        return primes;
+    }
+
+    private static int[][] primeFactors(int n) {
+        int[] dividers = primes(n);
+        int i = 0;
+        int size = 0;
+        for (int j = 0; j != dividers.length; ++j) {
+            if (n % dividers[j] == 0) {
+                size = size + 1;
+            }
+        }
+        int[][] result = new int[size][];
+        int step = 0;
+        int degree;
+        while (dividers[i] * dividers[i] <= n) {
+            degree = 0;
+            int[] cell = new int[2];
+            while (n % dividers[i] == 0) {
+                n = n / dividers[i];
+                degree = degree + 1;
+            }
+            cell[0] = dividers[i];
+            cell[1] = degree;
+            if (degree != 0) {
+                result[step] = cell;
+                step = step + 1;
+            }
+            i = i + 1;
+        }
+        degree = 1;
+        if (n != 1) {
+            int[] cell = new int[2];
+            cell[0] = dividers[i];
+            cell[1] = degree;
+            result[step] = cell;
         }
         return result;
-    }
-
-    private static void primeFactors(int n) {
-        int[] primes = primes(n);
-        int i = n - 1;
-        while (primes[i] == 0) {
-            i = i - 1;
-        }
-        while (n != 1) {
-            if (n % primes[i] == 0) {
-                n = n / primes[i];
-                System.out.print(primes[i] + " ");
-            } else {
-                i = i - 1;
-            }
-        }
-    }
-
-    private static int binarySearch(int[] x, int n) {
-        for (int i = 0; i != x.length - 1; ++i) {
-            for (int j = i; j != x.length; ++j) {
-                if (x[i] >= x[j]) {
-                    int k = x[i];
-                    x[i] = x[j];
-                    x[j] = k;
-                }
-            }
-        }
-        System.out.println(Arrays.toString(x));
-        int i = x.length / 2;
-        int beginning = x[0];
-        int ending = x[x.length - 1];
-        while (x[i] != n) {
-            if (i == 0) {
-                break;
-            }
-            if (i == x.length - 1) {
-                break;
-            }
-            if (x[i] > n) {
-                ending = i;
-                i = (i - beginning) / 2;
-            } else {
-                beginning = i;
-                i = (ending + i) / 2;
-            }
-        }
-        return i + 1;
     }
 }
 

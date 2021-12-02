@@ -14,7 +14,7 @@ public class Regular_expressions {
         Time_in_text(text);
         String test_space = "Это строка   , у которой зачем-то написаны два пробела перед запятой";
         space_correction(test_space);
-        String test_hyphen =  "Какая-то сине-зеленовая трава";
+        String test_hyphen = "Какая-то сине-зеленовая трава";
         shift_places(test_hyphen);
     }
 
@@ -73,7 +73,6 @@ public class Regular_expressions {
     private static void shift_places(String text) {
         System.out.println(text.replaceAll("([\\u0410-\\u044fa-zA-Z0-9]+)-([\\u0410-\\u044fa-zA-Z0-9]+)", "$2-$1"));
     }
-
 
 
 }

@@ -16,6 +16,10 @@ public class Regular_expressions {
         space_correction(test_space);
         String test_hyphen = "Какая-то сине-зеленовая трава";
         shift_places(test_hyphen);
+        String test_cats = "Кот, который устроил котострофу";
+        cats_count(test_cats);
+        String test_nums = "У меня 2 яблока и -4 банана";
+        bigger_number(test_nums);
     }
 
     private static boolean Email_check_1(String a) {
@@ -72,6 +76,45 @@ public class Regular_expressions {
 
     private static void shift_places(String text) {
         System.out.println(text.replaceAll("([\\u0410-\\u044fa-zA-Z0-9]+)-([\\u0410-\\u044fa-zA-Z0-9]+)", "$2-$1"));
+    }
+
+    private static void cats_count(String text) {
+        Pattern all_cats = Pattern.compile("кот|кошка|cat", Pattern.CASE_INSENSITIVE + Pattern.UNICODE_CASE);
+        Matcher m_1 = all_cats.matcher(text);
+        Pattern sep_cats = Pattern.compile("\\bкот\\b", Pattern.CASE_INSENSITIVE + Pattern.UNICODE_CASE);
+        Matcher m_2 = sep_cats.matcher(text);
+        int amount = 0;
+        int sep_amount = 0;
+        while (m_1.find()) {
+            amount = amount + 1;
+        }
+        while (m_2.find()) {
+            sep_amount = sep_amount + 1;
+        }
+        System.out.println("все коты - " + amount);
+        System.out.println("только отдельные коты - " + sep_amount);
+    }
+
+    private static void bigger_number(String text) {
+        Pattern pos_nums = Pattern.compile("[^-]\\d");
+        Pattern neg_nums = Pattern.compile("-\\d");
+        Pattern clear_num = Pattern.compile("\\d");
+        Matcher m_pos = pos_nums.matcher(text);
+        Matcher m_neg = neg_nums.matcher(text);
+        String num;
+        while (m_pos.find()) {
+            Matcher clear = clear_num.matcher(m_pos.group());
+            clear.find();
+            num = Integer.toString(Integer.parseInt(clear.group()) + 1);
+            text = text.replaceAll(clear.group(), num);
+        }
+        while (m_neg.find()) {
+            Matcher clear = clear_num.matcher(m_neg.group());
+            clear.find();
+            num = Integer.toString(Integer.parseInt(clear.group()) - 1);
+            text = text.replaceAll(clear.group(), num);
+        }
+        System.out.println(text);
     }
 
 

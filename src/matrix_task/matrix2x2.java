@@ -16,6 +16,10 @@ public class matrix2x2 {
         this.int_matrix = matrix;
     }
 
+    public matrix2x2(int a){
+        this.str_matrix = new String[][]{{"sin %s".formatted(a),"cos %s".formatted(a)},{"-cos %s".formatted(a),"sin %s".formatted(a)}};
+    }
+
     void dis_footprint() {
         int[][] matrix = this.int_matrix;
         int footprint = matrix[0][0] + matrix[1][1];

@@ -11,6 +11,8 @@ public class matrix_test {
         num_matrix.print();
         num_matrix.add(matrix_sum);
         num_matrix.mul(matrix_sum);
+        rotation trig = new rotation(45);
+        System.out.println(trig.getAngle());
 
     }
 

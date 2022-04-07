@@ -1,7 +1,7 @@
 package ru.spbu.arts.java.oop.ascigraphics;
 
 public class Drawing {
-    char[][] canvas;
+    public char[][] canvas;
 
     public Drawing(int x, int y, char s) {
         this.canvas = new char[y][x];

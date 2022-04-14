@@ -1,3 +1,5 @@
+package oldTasks;
+
 import java.util.Arrays;
 
 public class ArraysTasks {

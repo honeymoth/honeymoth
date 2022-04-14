@@ -1,3 +1,5 @@
+package oldTasks;
+
 public class IntroTaskCat {
     public static void main(String[] args){
         int cat = 2;

@@ -1,3 +1,5 @@
+package oldTasks;
+
 public class IntroTaskLast5 {
     public static void main(String[] args){
         int x = 150;

@@ -1,9 +1,11 @@
-public class IntroTaskSameDigits {
+package oldTasks;
+
+public class IntroTask3Digits {
     public static void main(String[] args){
-        int x =120;
-        if (x > 9 && x% 10 == (x / 10)%10){
+        int x = 1001;
+        if (x > 99 && x < 1000) {
             System.out.println("true");
-        }else{
+        } else {
             System.out.println("false");
         }
     }

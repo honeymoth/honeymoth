@@ -36,7 +36,7 @@ public class DontPressThisButton extends Application {
         VBox base = new VBox();
         PatientButton = new Button("не нажимайте эту кнопку");
         ScaryPic = new ImageView();
-        Image pic = new Image("ru/spbu/arts/java/oop/javafx/scary.jpg");
+        Image pic = new Image("images/scary.jpg");
         ScaryPic.setImage(pic);
 
         base.getChildren().addAll(PatientButton, ScaryPic);

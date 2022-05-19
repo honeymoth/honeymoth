@@ -4,4 +4,5 @@ module ru.spbu.arts.java.oop.javafx {
     requires javafx.controls;
 
     opens ru.spbu.arts.java.oop.javafx;
+    opens ru.spbu.arts.java.oop.javafx.fractals;
 }
